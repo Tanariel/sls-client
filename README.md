@@ -12,7 +12,7 @@ A Colissimo Simple Label Solution (SLS) client.
 
 ### Requirements
 
-- PHP >= 7.4
+- PHP >= 7.1
 - libxml PHP extension installed and enabled
 - soap PHP extension installed and enabled
 - composer
