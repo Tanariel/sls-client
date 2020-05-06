@@ -43,7 +43,7 @@ class FaultResponse implements FaultResponseInterface
      * @param string $rawResponse
      * @throws InvalidArgumentException
      */
-    public function __construct(array $rawResponse)
+    public function __construct(string $rawResponse)
     {
         if (false === \is_string($rawResponse)) {
             throw new InvalidArgumentException(\sprintf(
