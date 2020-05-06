@@ -25,17 +25,17 @@ class FaultResponse implements FaultResponseInterface
     /**
      * @var SimpleXMLElement $envelope
      */
-    private SimpleXMLElement $envelope;
+    private $envelope;
 
     /**
      * @var string $code
      */
-    private string $code;
+    private $code;
 
     /**
      * @var string $string
      */
-    private string $string;
+    private $string;
 
     /**
      * Constructs the response.

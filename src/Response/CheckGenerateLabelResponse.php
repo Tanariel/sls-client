@@ -25,22 +25,22 @@ class CheckGenerateLabelResponse implements CheckGenerateLabelResponseInterface
     /**
      * @var SimpleXMLElement $envelope
      */
-    private SimpleXMLElement $envelope;
+    private $envelope;
 
     /**
      * @var string $messageId
      */
-    private string $messageId;
+    private $messageId;
 
     /**
      * @var null|string $label
      */
-    private ?string $label;
+    private $label;
 
     /**
      * @var null|string $parcelNumber
      */
-    private ?string $parcelNumber;
+    private $parcelNumber;
 
     /**
      * Constructs the response.
