@@ -124,7 +124,7 @@ class GenerateLabelResponse implements GenerateLabelResponseInterface
         if (1 === \preg_match(\sprintf('~%s~', $rawResponseRegexPatterns[0]), $rawResponse, $data)) {
             $this->envelope  = new SimpleXMLElement($data[0]);
             $this->errorCode = $data[1];
-            $this->erroMessage = $data[2];
+            $this->errorMessage = $data[2];
 
             return;
         }

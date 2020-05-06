@@ -42,6 +42,10 @@ class CheckGenerateLabelResponse implements CheckGenerateLabelResponseInterface
      */
     private $parcelNumber;
 
+    private $errorCode;
+
+    private $errorMessage;
+
     /**
      * Constructs the response.
      *
@@ -92,6 +96,21 @@ class CheckGenerateLabelResponse implements CheckGenerateLabelResponseInterface
         return $this->parcelNumber;
     }
 
+    public function isError(): ?bool
+    {
+        return $this->errorCode ? true : false;
+    }
+
+    public function getErrorMessage(): ?string
+    {
+        return $this->errorMessage;
+    }
+
+    public function getErrorCode(): ?string
+    {
+        return $this->errorCode;
+    }
+
     /**
      * Parses the raw response.
      *
@@ -102,9 +121,15 @@ class CheckGenerateLabelResponse implements CheckGenerateLabelResponseInterface
     {
         $rawResponseRegexPatterns = $this->getRawResponseRegexPatterns();
 
-        if (1 === \preg_match(\sprintf('~%s~', $rawResponseRegexPatterns[0]), $rawResponse, $data) ||
-            1 === \preg_match(\sprintf('~%s~', $rawResponseRegexPatterns[1]), $rawResponse, $data)
-        ) {
+        if (1 === \preg_match(\sprintf('~%s~', $rawResponseRegexPatterns[0]), $rawResponse, $data)) {
+            $this->envelope  = new SimpleXMLElement($data[0]);
+            $this->errorCode = $data[1];
+            $this->errorMessage = $data[2];
+
+            return;
+        }
+
+        if (1 === \preg_match(\sprintf('~%s~', $rawResponseRegexPatterns[1]), $rawResponse, $data)) {
             $this->envelope  = new SimpleXMLElement($data[0]);
             $this->messageId = $data[1];
 
@@ -141,7 +166,7 @@ class CheckGenerateLabelResponse implements CheckGenerateLabelResponseInterface
                         <return>
                             <messages>
                                 <id>([a-zA-Z0-9_]+)</id>
-                                <messageContent>[À-ÿèêa-zA-Z0-9:\. ]+</messageContent>
+                                <messageContent>([À-ÿèêa-zA-Z0-9:\. ]+)</messageContent>
                                 <type>ERROR</type>
                             </messages>
                         </return>
