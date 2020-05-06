@@ -73,9 +73,16 @@ $requestParameters = [
 
 $response = $client->generateLabel($requestParameters);
 
-$response->getMessageId();    // '0'
-$response->getLabel();        // <binary attachment>
-$response->getParcelNumber(); // '6A11111111111'
+if ($response->isError()) {
+    $response->getErrorCode(); // '30027'
+    $response->getErrorMessage(); // 'Le code pays du destinataire est incorrect'
+} else {
+    $response->getMessageId();    // '0'
+    $response->getLabel();        // <binary attachment>
+    $response->getParcelNumber(); // '6A11111111111'
+}
+
+
 ```
 
 This library is currently a *passthrough* client of the SLS service. Therefore, the [SLS documentation](https://github.com/opportus/sls-client/blob/master/specs/sls-doc-2019-03.pdf) covers pretty much everything else you need to know in order to use this library.

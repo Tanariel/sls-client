@@ -39,5 +39,26 @@ interface GenerateLabelResponseInterface extends ResponseInterface
      * @return null|string
      */
     public function getParcelNumber(): ?string;
+
+    /**
+     * Is the response an error ?
+     *
+     * @return bool
+     */
+    public function isError(): ?bool;
+
+    /**
+     * Get the error message
+     *
+     * @return null|string
+     */
+    public function getErrorMessage(): ?string;
+
+    /**
+     * Get the error code
+     *
+     * @return null|string
+     */
+    public function getErrorCode(): ?string;
 }
 

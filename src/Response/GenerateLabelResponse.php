@@ -42,6 +42,10 @@ class GenerateLabelResponse implements GenerateLabelResponseInterface
      */
     private $parcelNumber;
 
+    private $errorCode;
+
+    private $errorMessage;
+
     /**
      * Constructs the response.
      *
@@ -92,6 +96,21 @@ class GenerateLabelResponse implements GenerateLabelResponseInterface
         return $this->parcelNumber;
     }
 
+    public function isError(): ?bool
+    {
+        return $this->errorCode ? true : false;
+    }
+
+    public function getErrorMessage(): ?string
+    {
+        return $this->errorMessage;
+    }
+
+    public function getErrorCode(): ?string
+    {
+        return $this->errorCode;
+    }
+
     /**
      * Parses the raw response.
      *
@@ -102,9 +121,15 @@ class GenerateLabelResponse implements GenerateLabelResponseInterface
     {
         $rawResponseRegexPatterns = $this->getRawResponseRegexPatterns();
 
-        if (1 === \preg_match(\sprintf('~%s~', $rawResponseRegexPatterns[0]), $rawResponse, $data) ||
-            1 === \preg_match(\sprintf('~%s~', $rawResponseRegexPatterns[1]), $rawResponse, $data)
-        ) {
+        if (1 === \preg_match(\sprintf('~%s~', $rawResponseRegexPatterns[0]), $rawResponse, $data)) {
+            $this->envelope  = new SimpleXMLElement($data[0]);
+            $this->errorCode = $data[1];
+            $this->erroMessage = $data[2];
+
+            return;
+        }
+
+        if (1 === \preg_match(\sprintf('~%s~', $rawResponseRegexPatterns[1]), $rawResponse, $data)) {
             $this->envelope  = new SimpleXMLElement($data[0]);
             $this->messageId = $data[1];
 
