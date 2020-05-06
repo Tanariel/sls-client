@@ -166,7 +166,7 @@ class GenerateLabelResponse implements GenerateLabelResponseInterface
                         <return>
                             <messages>
                                 <id>([a-zA-Z0-9_]+)</id>
-                                <messageContent>[À-ÿèêa-zA-Z0-9:\. ]+</messageContent>
+                                <messageContent>([À-ÿèêa-zA-Z0-9:\. ]+)</messageContent>
                                 <type>ERROR</type>
                             </messages>
                         </return>
