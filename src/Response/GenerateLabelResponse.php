@@ -187,13 +187,10 @@ class GenerateLabelResponse implements GenerateLabelResponseInterface
                                 <label>
                                     <xop:Include xmlns:xop="http://www.w3.org/2004/08/xop/include" href="cid:([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[0-9a-f]{4,5}@cxf.apache.org)"/>
                                 </label>
-                                <parcelNumber>([0-9][A-Z][0-9]{11})</parcelNumber>
-                                <parcelNumberPartner>[0-9A-Z]{28}</parcelNumberPartner>
+                                <parcelNumber>([a-zA-Z0-9]{11,13})</parcelNumber>
+                                (<parcelNumberPartner>[0-9A-Z]{28}</parcelNumberPartner>)?
                                 (<fields>
-                                    (<field>
-                                        <key>[A-Z_]+</key>
-                                        <value>[. ]*</value>
-                                    </field>)*
+                                    (.)*
                                 </fields>)*
                             </labelV2Response>
                         </return>
